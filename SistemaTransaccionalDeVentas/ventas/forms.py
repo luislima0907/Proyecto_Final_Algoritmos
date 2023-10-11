@@ -38,3 +38,24 @@ class AddProductoForm(forms.ModelForm):
             "precio": "Costo del producto",
             "imagen": "Imagen de referencia hacia el producto",
         }
+
+class EditarProductoForm(forms.ModelForm):
+    class Meta:
+        model = Producto
+        fields = ("codigo", "nombre", "existencia", "proveedor", "precio", "imagen")
+        labels = {
+            "codigo": "Codigo_producto: ",
+            "nombre": "Nombre_producto",
+            "existencia": "Cantidad_producto",
+            "proveedor": "Nombre_proveedor",
+            "precio": "Costo_producto",
+            "imagen": "Imagen_referencia_producto",
+        }
+        widgets = {
+            'codigo': forms.TextInput(attrs={"type": 'text', "id": 'codigo_editar'}),
+            'nombre': forms.TextInput(attrs={"id": 'nombre_editar'}),
+            'existencia': forms.TextInput(attrs={"id": 'existencia_editar'}),
+            'proveedor': forms.TextInput(attrs={"id": 'proveedor_editar'}),
+            'precio': forms.TextInput(attrs={"id": 'precio_editar'}),
+            'imagen': forms.TextInput(attrs={"id": 'imagen_editar'}),
+        }

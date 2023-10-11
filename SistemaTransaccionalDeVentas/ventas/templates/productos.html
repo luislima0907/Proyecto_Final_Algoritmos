@@ -9,7 +9,7 @@
 <script src="{% static 'index/js/b4.js' %}"></script>
 
 
-<div id="AgregarPersonalModal" class="modal" style="overflow: scroll;">
+<div id="AgregarProductoModal" class="modal" style="overflow: scroll;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-info">
@@ -41,15 +41,15 @@
     </div>
 </div>
 
-<div id="EditarPersonalModal" class="modal">
+<div id="EditarProductoModal" class="modal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-info">
                 <h5 class="modal-title text-dark">Editar</h5>
             </div>
             <div class="modal-body bg-dark text-white">
-                <form method="POST" action="{% url 'EditCliente' %}" enctype="multipart/form-data">{% csrf_token %}
-                    <input type="hidden" id="id_personal_editar" name="id_personal_editar">
+                <form method="POST" action="{% url 'EditProduct' %}" enctype="multipart/form-data">{% csrf_token %}
+                    <input type="hidden" id="id_producto_editar" name="id_producto_editar">
                     {% for field in form_editar %}
                     <p> {{field.label}} <br>
                         {{field|add_class:"form-control"}}</p>
@@ -103,7 +103,7 @@
         <!--Luego modificar los iconos de los productos y los demas xddddd -->>
         <h3 class="text-center">Productos<i class="fas fa-users"></i></h3>
         <div class="col-md-3 pb-2">
-            <a href="#AgregarPersonalModal"
+            <a href="#AgregarProductoModal"
                 data-toggle="modal" data-dismiss="modal">
                 <button type="button" class="btn btn-success">
                     Agregar Producto
@@ -140,7 +140,7 @@
                         <td></td>
                         {% endif %}
                         <td>
-                            <button onclick="" class="btn btn-dark-outline btn-sm" data-toggle="modal"
+                            <button onclick="editarProducto('{{i.id}}', '{{i.codigo}}', '{{i.nombre}}', '{{i.existencia}}', '{{i.proveedor}}', '{{i.precio}}', '{{i.imagen}}')" class="btn btn-dark-outline btn-sm" data-toggle="modal"
                                 href="#EditarPersonalModal"><img src="{% static 'index/img/editar.png' %}" alt="Error"
                                     width="30"></button>
                             <button onclick="" class="btn btn-dark-outline btn-sm"

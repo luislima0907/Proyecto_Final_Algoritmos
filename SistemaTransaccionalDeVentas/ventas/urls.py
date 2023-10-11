@@ -8,7 +8,8 @@ urlpatterns = [
     path('delete_cliente/', views.delete_cliente_views, name='DeleteCliente'),
     path('productos/', views.productos_views, name='Productos'),
     path('add_producto/', views.add_producto_views, name='AddProducto'),
-    path('add_venta/', views.add_ventas.as_views(), name='AddVenta'),
-    path('export/', views.export_pdf_views, name='ExportPDF'),
-    path('export/<id>/<iva>', views.export_pdf_views, name='ExportPDF'),
+    path('edit_producto/', views.edit_producto_views, name='EditProduct'),
+    path('add_venta/',views.add_ventas.as_view(), name='AddVenta'),
+    path('export/', views.export_pdf_view, name="ExportPDF" ),
+    path('export/<id>/<iva>', views.export_pdf_view, name="ExportPDF" ),
 ]

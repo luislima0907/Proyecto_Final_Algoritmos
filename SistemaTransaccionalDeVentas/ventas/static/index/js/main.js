@@ -90,15 +90,25 @@ function eliminarPreventivo(id) {
   document.getElementById("id_preventivo_eliminar").value = id;
 }
 
-function eliminarProducto(id) {
-  document.getElementById("id_producto_eliminar").value = id;
-}
-
 function editarPersonal(id, codigo, nombre, direccion) {
   document.getElementById("id_personal_editar").value = id;
   document.getElementById("nombre_editar").value = nombre;
   document.getElementById("codigo_editar").value = codigo;
   document.getElementById("direccion_editar").value = direccion;
+}
+
+function editarProducto(id, codigo, nombre, existencia, proveedor, precio, imagen) {
+  document.getElementById("id_producto_editar").value = id;
+  document.getElementById("codigo_editar").value = codigo;
+  document.getElementById("nombre_editar").value = nombre;
+  document.getElementById("existencia_editar").value = existencia;
+  document.getElementById("proveedor_editar").value = proveedor;
+  document.getElementById("precio_editar").value = precio;
+  document.getElementById("imagen_editar").value = imagen;
+}
+
+function eliminarProducto(id) {
+  document.getElementById("id_producto_eliminar").value = id;
 }
 
 function eliminarPersonal(id) {

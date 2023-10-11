@@ -1,7 +1,7 @@
 from pyexpat.errors import messages
 from django.shortcuts import render, redirect
 from .models import Cliente, Producto, Egreso, Producto, Egreso, ProductosEgreso
-from .forms import AddClienteForm, EditarClienteForm, AddProductoForm
+from .forms import AddClienteForm, EditarClienteForm, AddProductoForm, EditarProductoForm
 from django.contrib import messages
 from django.views.generic import ListView
 from django.http import JsonResponse, HttpResponse
@@ -10,7 +10,6 @@ from django.template.loader import get_template
 from weasyprint import HTML, CSS
 from django.conf import settings
 import os
-
 # Create your views here.
 
 def ventas_views(request):
@@ -33,7 +32,7 @@ def add_cliente_views(request):
     #print("Guardar cliente")
     if request.POST:
         form = AddClienteForm(request.POST, request.FILES)
-        if form.is_valid:
+        if form.is_valid():
             try:
                 form.save()
             except:
@@ -45,7 +44,7 @@ def edit_cliente_views(request):
     if request.POST:
         cliente = Cliente.objects.get(pk=request.POST.get('id_personal_editar'))
         form = EditarClienteForm(request.POST, request.FILES, instance = cliente)
-        if form.is_valid:
+        if form.is_valid():
             form.save()
     return redirect('Clientes')
 
@@ -62,16 +61,18 @@ def productos_views(request):
     '''
     productos = Producto.objects.all()
     form_add = AddProductoForm()
+    form_editar = EditarProductoForm()
     context = {
         "productos": productos,
-        "form_add": form_add
+        "form_add": form_add,
+        "form_editar": form_editar,
     }
     return render(request, 'productos.html', context)
 
 def add_producto_views(request):
     if request.POST:
         form = AddProductoForm(request.POST, request.FILES)
-        if form.is_valid:
+        if form.is_valid():
             try:
                 form.save()
             except:
@@ -79,7 +80,13 @@ def add_producto_views(request):
                 return redirect('Productos')         
     return redirect('Productos')
 
-
+def edit_producto_views(request):
+    if request.POST:
+        producto = Producto.objects.get(pk=request.POST.get('id_producto_editar'))
+        form = EditarProductoForm(request.POST, request.FILES, instance = producto)
+        if form.is_valid():
+            form.save()
+    return redirect('Productos')
 
 class add_ventas(ListView):
     template_name = 'add_ventas.html'
@@ -111,7 +118,7 @@ class add_ventas(ListView):
         return JsonResponse(data,safe=False)
 
 
-def export_pdf_views(request, id, iva):
+def export_pdf_view(request, id, iva):
     #print(id)
     template = get_template("ticket.html")
     #print(id)
